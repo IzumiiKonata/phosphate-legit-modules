@@ -3,7 +3,6 @@ package tech.konata.phosphate.legit.module;
 import org.lwjgl.glfw.GLFW;
 import tech.konata.phosphate.api.Extension;
 import tech.konata.phosphate.api.PApi;
-import tech.konata.phosphate.api.enums.EnumCategory;
 import tech.konata.phosphate.api.enums.EnumKeybind;
 import tech.konata.phosphate.api.events.AttackEvent;
 import tech.konata.phosphate.api.events.TickEvent;
@@ -22,7 +21,7 @@ import java.util.concurrent.ThreadLocalRandom;
 public class AutoClicker extends ExtensionModule {
 
     public AutoClicker() {
-        super("Auto Clicker", "Auto clicks for u.", EnumCategory.OTHER);
+        super("Auto Clicker", "Auto clicks for u.", Extension.getAPI().createCategory("Combat"));
         super.addSettings(this.minCPS, this.maxCPS, this.leftClick, this.rightClick, this.hitSelect);
 
         this.minCPS.setValueCallback(min -> {
