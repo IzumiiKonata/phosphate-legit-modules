@@ -1,6 +1,5 @@
 package tech.konata.phosphate.legit.module;
 
-import org.lwjgl.glfw.GLFW;
 import tech.konata.phosphate.api.Extension;
 import tech.konata.phosphate.api.PApi;
 import tech.konata.phosphate.api.enums.EnumKeybind;

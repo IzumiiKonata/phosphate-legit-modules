@@ -2,6 +2,7 @@ package tech.konata.phosphate.legit;
 
 import tech.konata.phosphate.api.Extension;
 import tech.konata.phosphate.api.PApi;
+import tech.konata.phosphate.legit.module.AimAssist;
 import tech.konata.phosphate.legit.module.AutoClicker;
 
 /**
@@ -16,6 +17,7 @@ public class LegitExtension extends Extension {
 
         // 注册模块
         pApi.registerModule(new AutoClicker());
+        pApi.registerModule(new AimAssist());
     }
 
     @Override
