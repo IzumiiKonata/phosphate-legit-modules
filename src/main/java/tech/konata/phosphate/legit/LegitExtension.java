@@ -31,6 +31,6 @@ public class LegitExtension extends Extension {
 
     @Override
     public String getVersion() {
-        return "0.1";
+        return "0.2";
     }
 }
