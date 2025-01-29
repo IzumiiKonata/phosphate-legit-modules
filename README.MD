@@ -2,6 +2,7 @@
 
 ## 当前支持的功能
 - Auto Clicker
+- Aim Assist
 
 ## 加载扩展
 
