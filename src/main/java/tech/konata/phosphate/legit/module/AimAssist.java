@@ -29,6 +29,7 @@ public class AimAssist extends ExtensionModule {
     NumberSetting<Double> horizontalSpeed = Extension.getAPI().createNumberSetting("Horizontal Speed", 5.0, 1.0, 20.0, 0.1);
     NumberSetting<Double> verticalSpeed = Extension.getAPI().createNumberSetting("Vertical Speed", 5.0, 1.0, 20.0, 0.1);
     NumberSetting<Double> distance = Extension.getAPI().createNumberSetting("Distance", 5.0, 1.0, 8.0, 0.1);
+    NumberSetting<Float> fov = Extension.getAPI().createNumberSetting("Fov", 100.0f, 1.0f, 360.0f, 1.0f);
     BooleanSetting clickAim = Extension.getAPI().createBooleanSetting("Click Aim", true);
     BooleanSetting onTarget = Extension.getAPI().createBooleanSetting("Aim While On Target", true);
     BooleanSetting strafeInc = Extension.getAPI().createBooleanSetting("Strafe Increase", false);
@@ -60,7 +61,7 @@ public class AimAssist extends ExtensionModule {
 
     public AimAssist() {
         super("Aim Assist", "Auto aims 4 u.", Extension.getAPI().createCategory("Combat"));
-        super.addSettings(this.horizontalSpeed, this.verticalSpeed, this.distance, this.clickAim, this.onTarget, this.strafeInc, this.checkBlockBreak);
+        super.addSettings(this.horizontalSpeed, this.verticalSpeed, this.distance, this.fov, this.clickAim, this.onTarget, this.strafeInc, this.checkBlockBreak);
 
         this.horizontalSpeedModifier = 0.0F;
         this.verticalSpeedModifier = 0.0F;
@@ -410,6 +411,7 @@ public class AimAssist extends ExtensionModule {
         final List<? extends Entity> players = mc.getLoadedEntities();
 
         Player target = null;
+        double maxAng = 360.0;
         for (final Entity entity : players) {
 
             if (!(entity instanceof Player))
@@ -421,7 +423,12 @@ public class AimAssist extends ExtensionModule {
                 double dist = mc.getLocalPlayer().getDistanceToPosition(entityPlayer.getX(), entityPlayer.getY(), entityPlayer.getZ());
                 if (dist > distance.getValue())
                     continue;
-                target = entityPlayer;
+
+                double ang = RotationUtils.calculateRelativeAngle(mc.getLocalPlayer(), entityPlayer);
+                if (ang < maxAng && ang <= this.fov.getValue() / 2.0) {
+                    maxAng = ang;
+                    target = entityPlayer;
+                }
             }
         }
         return target;
