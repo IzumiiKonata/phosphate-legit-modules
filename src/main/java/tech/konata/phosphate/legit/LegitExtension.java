@@ -4,6 +4,7 @@ import tech.konata.phosphate.api.Extension;
 import tech.konata.phosphate.api.PApi;
 import tech.konata.phosphate.legit.module.AimAssist;
 import tech.konata.phosphate.legit.module.AutoClicker;
+import tech.konata.phosphate.legit.module.Scaffold;
 
 /**
  * @author IzumiiKonata
@@ -18,6 +19,7 @@ public class LegitExtension extends Extension {
         // 注册模块
         pApi.registerModule(new AutoClicker());
         pApi.registerModule(new AimAssist());
+        pApi.registerModule(new Scaffold());
     }
 
     @Override
@@ -31,6 +33,6 @@ public class LegitExtension extends Extension {
 
     @Override
     public String getVersion() {
-        return "0.2";
+        return "0.3";
     }
 }

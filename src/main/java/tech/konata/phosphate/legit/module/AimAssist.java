@@ -2,7 +2,6 @@ package tech.konata.phosphate.legit.module;
 
 import tech.konata.phosphate.api.Extension;
 import tech.konata.phosphate.api.PApi;
-import tech.konata.phosphate.api.enums.EnumKeybind;
 import tech.konata.phosphate.api.enums.EnumMovingObjectType;
 import tech.konata.phosphate.api.features.ExtensionModule;
 import tech.konata.phosphate.api.interfaces.game.Minecraft;
@@ -333,7 +332,7 @@ public class AimAssist extends ExtensionModule {
                 this.resetVars();
             } else {
 
-                if (this.clickAim.getValue() && !api.getGameSettings().isPressed(EnumKeybind.ATTACK)) {
+                if (this.clickAim.getValue() && !api.getGameSettings().getKeyAttack().isKeyDown()) {
                     this.target = null;
                     this.resetVars();
                 } else {
@@ -342,7 +341,7 @@ public class AimAssist extends ExtensionModule {
                         this.target = null;
                     }
 
-                    if (this.clickAim.getValue() && api.getGameSettings().isPressed(EnumKeybind.ATTACK) && this.target == null || !this.clickAim.getValue()) {
+                    if (this.clickAim.getValue() && api.getGameSettings().getKeyAttack().isKeyDown() && this.target == null || !this.clickAim.getValue()) {
                         LivingEntity target = this.getTarget();
                         if (!this.clickAim.getValue()) {
                             ++this.refreshDelay;
@@ -400,7 +399,7 @@ public class AimAssist extends ExtensionModule {
     }
 
     private boolean noAction() {
-        return clickAim.getValue() && !Extension.getAPI().getGameSettings().isPressed(EnumKeybind.ATTACK);
+        return clickAim.getValue() && !Extension.getAPI().getGameSettings().getKeyAttack().isKeyDown();
     }
 
     private Player getTarget() {
@@ -408,7 +407,7 @@ public class AimAssist extends ExtensionModule {
         PApi api = Extension.getAPI();
         Minecraft mc = api.getMinecraft();
 
-        final List<? extends Entity> players = mc.getLoadedEntities();
+        final List<? extends Entity> players = mc.getWorld().getLoadedPlayers();
 
         Player target = null;
         double maxAng = 360.0;

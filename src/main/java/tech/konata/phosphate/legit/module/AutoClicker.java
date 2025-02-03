@@ -2,7 +2,6 @@ package tech.konata.phosphate.legit.module;
 
 import tech.konata.phosphate.api.Extension;
 import tech.konata.phosphate.api.PApi;
-import tech.konata.phosphate.api.enums.EnumKeybind;
 import tech.konata.phosphate.api.events.AttackEvent;
 import tech.konata.phosphate.api.events.TickEvent;
 import tech.konata.phosphate.api.features.ExtensionModule;
@@ -68,7 +67,7 @@ public class AutoClicker extends ExtensionModule {
         if (delayTimer.isDelayed(this.nextSwing) && (!hitSelect.getValue() || ((hitSelect.getValue() && attackTicks >= 10) || (thePlayer.getHurtTime() > 0 && delayTimer.isDelayed(this.nextSwing))))) {
             final long clicks = (long) (Math.round(this.getRandom(this.minCPS.getValue(), this.maxCPS.getValue())) * 1.5);
 
-            if (api.getGameSettings().isPressed(EnumKeybind.ATTACK)) {
+            if (api.getGameSettings().getKeyAttack().isKeyDown()) {
                 ticksDown++;
             } else {
                 ticksDown = 0;
@@ -76,7 +75,7 @@ public class AutoClicker extends ExtensionModule {
 
             this.nextSwing = 1000 / clicks;
 
-            if (rightClick.getValue() && api.getGameSettings().isPressed(EnumKeybind.USE_ITEM) && !api.getGameSettings().isPressed(EnumKeybind.ATTACK)) {
+            if (rightClick.getValue() && api.getGameSettings().getKeyUseItem().isKeyDown() && !api.getGameSettings().getKeyAttack().isKeyDown()) {
                 api.getMinecraft().getLocalPlayer().rightClickMouse();
 
                 if (Math.random() > 0.9) {
@@ -84,7 +83,7 @@ public class AutoClicker extends ExtensionModule {
                 }
             }
 
-            if (leftClick.getValue() && ticksDown > 1 && (Math.sin(nextSwing) + 1 > Math.random() || Math.random() > 0.25 || delayTimer.isDelayed(4 * 50)) && !api.getGameSettings().isPressed(EnumKeybind.USE_ITEM)) {
+            if (leftClick.getValue() && ticksDown > 1 && (Math.sin(nextSwing) + 1 > Math.random() || Math.random() > 0.25 || delayTimer.isDelayed(4 * 50)) && !api.getGameSettings().getKeyUseItem().isKeyDown()) {
                 api.getMinecraft().getLocalPlayer().clickMouse();
             }
 
