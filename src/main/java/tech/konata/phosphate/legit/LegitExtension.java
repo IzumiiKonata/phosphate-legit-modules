@@ -5,6 +5,7 @@ import tech.konata.phosphate.api.PApi;
 import tech.konata.phosphate.legit.module.AimAssist;
 import tech.konata.phosphate.legit.module.AutoClicker;
 import tech.konata.phosphate.legit.module.Eagle;
+import tech.konata.phosphate.legit.module.JumpReset;
 
 /**
  * @author IzumiiKonata
@@ -20,6 +21,7 @@ public class LegitExtension extends Extension {
         pApi.registerModule(new AutoClicker());
         pApi.registerModule(new AimAssist());
         pApi.registerModule(new Eagle());
+        pApi.registerModule(new JumpReset());
     }
 
     @Override
