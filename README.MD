@@ -3,6 +3,8 @@
 ## 当前支持的功能
 - Auto Clicker
 - Aim Assist
+- Eagle
+- Jump Reset
 
 ## 加载扩展
 
